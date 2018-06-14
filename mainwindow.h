@@ -1,9 +1,13 @@
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QActionGroup>
-#include <QLabel>
+
+class QAction;
+class QActionGroup;
+class QLabel;
+class QMenu;
 
 class MainWindow : public QMainWindow
 {
@@ -11,10 +15,29 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow();
+
+protected:
+#ifndef QT_NO_CONTEXTMENU
+    void contextMenuEvent(QContextMenuEvent *event) override;
+#endif // QT_NO_CONTEXTMENU
+
 private slots:
     void mapScreen();
+    void chitwanScreen();
+    void kathmanduScreen();
+    void about();
+
 private:
-     void homeScreen();
+    void createActions();
+    void createMenus();
+    void homeScreen();
+
+    QMenu *fileMenu;
+    QMenu *helpMenu;
+    QMenu *back;
+    QAction *exitAct;
+    QAction *aboutAct;
+    QAction *mapScreenAct;
 };
 
-#endif // MAINWINDOW_H
+#endif
