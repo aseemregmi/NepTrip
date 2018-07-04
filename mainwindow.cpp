@@ -140,10 +140,13 @@ void MainWindow::createActions()
     exitAct->setShortcuts(QKeySequence::Quit);
     connect(exitAct, &QAction::triggered, this, &QWidget::close);
 
+    homeAct = new QAction(tr("&Home Page"), this);
+    connect(homeAct, &QAction::triggered, this, &MainWindow::homeScreen);
+
     aboutAct = new QAction(tr("&About"), this); // Displays About Box or it triggers about() slot
     connect(aboutAct, &QAction::triggered, this, &MainWindow::about);
 
-    mapScreenAct = new QAction(tr("&GoBack"), this);
+    mapScreenAct = new QAction(tr("&Go To Map"), this);
     connect(mapScreenAct, &QAction::triggered, this, &MainWindow::mapScreen);
 }
 
@@ -153,10 +156,11 @@ void MainWindow::createMenus()
     fileMenu->addSeparator();
     fileMenu->addAction(exitAct);
 
+    optionsMenu = menuBar()->addMenu("&Options");
+    optionsMenu->addAction(homeAct);
+    optionsMenu->addAction(mapScreenAct);
+
     helpMenu = menuBar()->addMenu(tr("&Help"));
     helpMenu->addAction(aboutAct);
-
-    back = menuBar()->addMenu("&GoBack");
-    back->addAction(mapScreenAct);
 
 }

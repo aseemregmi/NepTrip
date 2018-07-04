@@ -23,8 +23,18 @@ protected:
 
 private slots:
     void mapScreen();
+
+    // Slots for 77 districts
+
+    //void dangScreen();
+    //void salyanScreen();
+    //void bankeScreen();
+    //void kanchanpurScreen()
+
     void chitwanScreen();
     void kathmanduScreen();
+
+    //About Dialog Box
     void about();
 
 private:
@@ -34,10 +44,11 @@ private:
 
     QMenu *fileMenu;
     QMenu *helpMenu;
-    QMenu *back;
+    QMenu *optionsMenu;
     QAction *exitAct;
     QAction *aboutAct;
     QAction *mapScreenAct;
+    QAction *homeAct;
 };
 
 #endif
