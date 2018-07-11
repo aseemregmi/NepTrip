@@ -1,5 +1,5 @@
 QT += core gui
-
+QT += qml quick
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = NepTrip
@@ -13,3 +13,6 @@ SOURCES += \
 
 HEADERS += \
         mainwindow.h
+
+DISTFILES += \
+    map.qml

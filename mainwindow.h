@@ -3,11 +3,18 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTableWidget>
+#include <QString>
+#include <QGraphicsView>
+#include <QGraphicsScene>
+
+
 
 class QAction;
 class QActionGroup;
 class QLabel;
 class QMenu;
+
 
 class MainWindow : public QMainWindow
 {
@@ -16,6 +23,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow();
 
+
 protected:
 #ifndef QT_NO_CONTEXTMENU
     void contextMenuEvent(QContextMenuEvent *event) override;
@@ -23,32 +31,56 @@ protected:
 
 private slots:
     void mapScreen();
-
-    // Slots for 77 districts
-
-    //void dangScreen();
-    //void salyanScreen();
-    //void bankeScreen();
-    //void kanchanpurScreen()
-
     void chitwanScreen();
     void kathmanduScreen();
-
-    //About Dialog Box
+    void khaptadScreen();
+    void ABCScreen();
+    void pokharaScreen();
+    void bhaktapurScreen();
+    void dhulikhelScreen();
+    void nagarkotScreen();
+    void kakaniScreen();
+    void EBCScreen();
+    void sagarmathaScreen();
+    void lhotseScreen();
+    void helambuScreen();
+    void lumbiniScreen();
+    void gorkhaScreen();
+    void bandipurScreen();
+    void janakpurScreen();
+    void birgunjScreen();
+    void illamScreen();
+    void manangScreen();
+    void mustangScreen();
+    void tansenScreen();
+    void damanScreen();
+    void namcheScreen();
+    void hileScreen();
+    void shivapuriScreen();
+    void ghorepaniScreen();
+    void langtangScreen();
+    void besisaharScreen();
+    void jiriScreen();
+    void chitlangScreen();
     void about();
 
 private:
+    QTableWidget* m_pTableWidget;
+    QStringList m_TableHeader;
+
     void createActions();
     void createMenus();
     void homeScreen();
 
     QMenu *fileMenu;
     QMenu *helpMenu;
-    QMenu *optionsMenu;
+    QMenu *back;
     QAction *exitAct;
     QAction *aboutAct;
     QAction *mapScreenAct;
-    QAction *homeAct;
+    QImage *sourceImage;
+    QGraphicsView *imageView;
+    QGraphicsScene *imageScene;
 };
 
 #endif
