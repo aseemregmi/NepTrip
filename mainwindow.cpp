@@ -117,7 +117,7 @@ void MainWindow:: mapScreen()
     connect(gotoKathmandu, SIGNAL(clicked()),this,SLOT(kathmanduScreen()));
 
     QToolButton *gotoKhaptad = new QToolButton;
-    QPixmap pixmap01("/home/aashish/Desktop/np.png");
+    QPixmap pixmap01("/home/aashish/NepTrip/img/np.png");
     QIcon ButtonIcon01(pixmap01);
     gotoKhaptad->setIcon(ButtonIcon01);
     gotoKhaptad->setStyleSheet(" border: none; background-color:green;");
@@ -377,38 +377,62 @@ void MainWindow:: mapScreen()
     gotoChitlang->setToolTip("Chitlang");
     connect(gotoChitlang, SIGNAL(clicked()),this,SLOT(chitlangScreen()));
 
+    QToolButton *gotoAnywhere = new QToolButton;
+    QPixmap pixmap30("/home/aashish/NepTrip/img/icon.png");
+    QIcon ButtonIcon30(pixmap30);
+    gotoAnywhere->setIcon(ButtonIcon30);
+    gotoAnywhere->setStyleSheet(" border: none; background-color:white;");
+    gotoAnywhere->setCursor(Qt::PointingHandCursor);
+    gotoAnywhere->setToolTip("Chitlang");
+    connect(gotoAnywhere, SIGNAL(clicked()),this,SLOT(chitlangScreen()));
 
-    layout->addWidget(gotoChitwan,18,17,1,1);
-    layout->addWidget(gotoKathmandu,2,2,1,1);
-    layout->addWidget(gotoKhaptad,7,5,1,1);
-    layout->addWidget(gotoABC,3,4,1,1);
-    layout->addWidget(gotoPokhara,4,5,1,1);
-    layout->addWidget(gotoBhaktapur,5,6,1,1);
-    layout->addWidget(gotoDhulikhel,6,7,1,1);
-    layout->addWidget(gotoNagarkot,7,8,1,1);
-    layout->addWidget(gotoKakani,8,9,1,1);
-    layout->addWidget(gotoEBC,9,10,1,1);
-    layout->addWidget(gotoSagarmatha,10,11,1,1);
-    layout->addWidget(gotoLhotse,11,12,1,1);
-    layout->addWidget(gotoHelambu,12,13,1,1);
-    layout->addWidget(gotoLumbini,13,14,1,1);
-    layout->addWidget(gotoGorkha,14,15,1,1);
-    layout->addWidget(gotoBandipur,15,16,1,1);
-    layout->addWidget(gotoJanakpur,16,17,1,1);
-    layout->addWidget(gotoBirgunj,17,18,1,1);
-    layout->addWidget(gotoIllam,18,19,1,1);
-    layout->addWidget(gotoManang,19,20,1,1);
-    layout->addWidget(gotoMustang,20,21,1,1);
-    layout->addWidget(gotoTansen,21,22,1,1);
-    layout->addWidget(gotoDaman,22,23,1,1);
-    layout->addWidget(gotoNamche,23,24,1,1);
-    layout->addWidget(gotoHile,24,25,1,1);
-    layout->addWidget(gotoShivapuri,25,26,1,1);
-    layout->addWidget(gotoGhorepani,26,27,1,1);
-    layout->addWidget(gotoLangtang,27,28,1,1);
-    layout->addWidget(gotoBesisahar,28,29,1,1);
-    layout->addWidget(gotoJiri,29,30,1,1);
-    layout->addWidget(gotoChitlang,30,31,1,1);
+
+    layout->addWidget(gotoChitwan, 700, 800);
+
+    layout->addWidget(gotoShivapuri, 900, 900 );
+
+    layout->addWidget(gotoKhaptad, 800, 500);
+    layout->addWidget(gotoLangtang, 1625, 2100);
+
+    layout->addWidget(gotoPokhara, 1600, 1625);
+    layout->addWidget(gotoBhaktapur, 1650, 2100);
+
+    layout->addWidget(gotoKathmandu, 1650, 2150);
+
+    layout->addWidget(gotoDhulikhel, 1650, 2050);
+    layout->addWidget(gotoChitlang, 1750, 2050);
+    layout->addWidget(gotoDaman, 1700, 2050);
+
+    layout->addWidget(gotoNagarkot, 700, 700);
+    layout->addWidget(gotoKakani, 800, 800);
+
+    layout->addWidget(gotoEBC, 1640, 2420);
+    layout->addWidget(gotoSagarmatha, 1600, 2420);
+    layout->addWidget(gotoLhotse, 1670, 2480);
+        //layout->addWidget(gotoNamche,1800,2500);
+
+    layout->addWidget(gotoHelambu, 1600, 2100);
+    layout->addWidget(gotoLumbini, 1700, 1300);
+    layout->addWidget(gotoGorkha, 1500, 1800);
+    layout->addWidget(gotoBandipur, 1650, 1750);
+    layout->addWidget(gotoJanakpur, 2400, 2198);
+    layout->addWidget(gotoBirgunj, 2400, 2100);
+
+    layout->addWidget(gotoManang, 1425, 1700);
+    layout->addWidget(gotoABC, 1425, 1675);
+    layout->addWidget(gotoMustang, 1400, 1625);
+
+    layout->addWidget(gotoTansen, 1650, 1550);
+
+    layout->addWidget(gotoGhorepani, 1600, 1600);
+
+    layout->addWidget(gotoJiri, 1670, 2198);
+    layout->addWidget(gotoBesisahar, 1625, 1650);
+
+    layout->addWidget(gotoHile, 2000, 2450);
+
+    layout->addWidget(gotoIllam, 2100, 2500);
+    layout->addWidget(gotoAnywhere, 3100, 3100);
 
     window->setLayout(layout);
     setWindowTitle("NepTrip");
@@ -480,18 +504,37 @@ void MainWindow::kathmanduScreen(){
     kathmandu->setMask(ktmmap.mask());
     kathmandu->setAlignment(Qt::AlignCenter);
 
+    QTextBrowser* displayIntro = new QTextBrowser();
+    QFile file("/home/aashish/NepTrip/files/ktm.txt");
+         if (file.open(QIODevice::ReadOnly | QIODevice::Text))
+            {
+             QTextStream status(&file);
+             displayIntro->setText(file.readAll());
+            }
 
-
-    QTextEdit *txt = new QTextEdit();
-    txt->setText("Hello This is Kathmandu");
+    QTextBrowser* displayAgency= new QTextBrowser();
+    QFile file1("/home/aashish/NepTrip/files/ktmagency.txt");
+        if (file1.open(QIODevice::ReadOnly | QIODevice::Text))
+            {
+            QTextStream status(&file1);
+            displayAgency->setText(file1.readAll());
+            }
+    QTextBrowser* displayclimate= new QTextBrowser();
+    QFile file2("/home/aashish/NepTrip/files/ktmclimate.txt");
+    if (file2.open(QIODevice::ReadOnly | QIODevice::Text));
+    {
+        QTextStream status(&file2);
+        displayclimate->setText(file2.readAll());
+    }
 
     QHBoxLayout *topLayout = new QHBoxLayout();
     topLayout->addWidget(kathmandu);
-    topLayout->addWidget(txt);
+    topLayout->addWidget(displayIntro);
     topFiller->setLayout(topLayout);
 
     QHBoxLayout *bottomLayout = new QHBoxLayout();
-    bottomLayout->addWidget(kathmandu);
+    bottomLayout->addWidget(displayclimate);
+    bottomLayout->addWidget(displayAgency);
     bottomFiller->setLayout(bottomLayout);
 
     QVBoxLayout *layout = new QVBoxLayout();
