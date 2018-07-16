@@ -16,3 +16,6 @@ HEADERS += \
 
 DISTFILES += \
     map.qml
+
+RESOURCES += \
+    resource.qrc

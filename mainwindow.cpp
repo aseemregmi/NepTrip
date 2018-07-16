@@ -13,6 +13,7 @@
 #include <QImage>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <QFrame>
 
 MainWindow::MainWindow()
 {
@@ -29,6 +30,48 @@ MainWindow::MainWindow()
     resize(480, 320);
 }
 
+QToolButton* MainWindow::getButton(QIcon x,QString s){
+    QToolButton *button = new QToolButton;
+    button->setIcon(x);
+    button->setStyleSheet(" border: none; background-color:white;");
+    button->setCursor(Qt::PointingHandCursor);
+    button->setToolTip(s);
+    return button;
+}
+
+
+QLabel* MainWindow::getCityImg(QPixmap x){
+    QLabel *IMG = new QLabel();
+    IMG->setPixmap(x);
+    IMG->setAlignment(Qt::AlignCenter);
+    return IMG;
+}
+
+QTextBrowser* MainWindow::getfile(QString p,QString t){
+    QTextBrowser *displaydata = new QTextBrowser();
+    QFile file(p);
+         if (file.open(QIODevice::ReadOnly | QIODevice::Text))
+            {
+             displaydata->setText(file.readAll());
+             displaydata->setFrameStyle(QFrame::NoFrame);
+             if (t=="Intro"){
+                displaydata->setStyleSheet("background-image:url(:/Images/Rainbow.png);");
+             }
+             else if (t=="Hotel"){
+                 displaydata->setStyleSheet("background-image:url(:/Images/Instagram.png);");
+             }
+             else if (t=="Extra"){
+                 displaydata->setStyleSheet("background-image:url(:/Images/Dusk.png);");
+             }
+             else if (t=="Agency"){
+                 displaydata->setStyleSheet("background-image:url(:/Images/Harmonic.png);");
+             }
+            }
+   return displaydata;
+
+}
+
+
 void MainWindow::homeScreen()
 {
     QWidget *window = new QWidget();
@@ -40,10 +83,7 @@ void MainWindow::homeScreen()
     head->setAlignment(Qt::AlignCenter);
 
     QLabel *logo = new QLabel();
-    QPixmap logoNepTrip("/home/aashish/NepTrip/img/logoNepTrip.jpg");
-    logo->setPixmap(logoNepTrip);
-    logo->setMask(logoNepTrip.mask());
-    logo->setAlignment(Qt::AlignCenter);
+    logo=getCityImg(QPixmap(":/Images/img/logoNepTrip.jpg"));
 
     QPushButton *gotoMap = new QPushButton("Let's Explore Nepal Together");
     gotoMap->setCursor(Qt::PointingHandCursor);
@@ -71,372 +111,181 @@ void MainWindow:: mapScreen()
 
     QGridLayout *layout = new QGridLayout();
 
-    /*QLabel *map = new QLabel();
-    QPixmap nepalmap("/home/aashish/Desktop/map.jpg");
-    map->setPixmap(nepalmap);
-    map->setMask(nepalmap.mask());
-    map->setAlignment(Qt::AlignCenter);*/
-
-    QPixmap bkgnd("/home/aashish/NepTrip/img/map.jpg");
+    QPixmap bkgnd(":/Images/img/map.jpg");
 
     bkgnd = bkgnd.scaled(1280,720, Qt::KeepAspectRatio);
     QPalette palette;
     palette.setBrush(QPalette::Background, bkgnd);
     setPalette(palette);
 
-
-    /*QQuickView *view = new QQuickView();
-    QWidget *container = QWidget::createWindowContainer(view, this);
-    container->setMinimumSize(512,512);
-    container->setMaximumSize(512,512);
-    container->setFocusPolicy(Qt::TabFocus);
-    view->setSource(QUrl("home/aashish/NepTrip/QML/map.qml"));
-    QVBoxLayout *verticalLayout = new QVBoxLayout(this);
-    verticalLayout->addWidget(container);
-    view->show();
-    container->show();*/
-
     QToolButton *gotoChitwan = new QToolButton;
-    QPixmap pixmap("/home/aashish/NepTrip/img/np.png");
-    QIcon ButtonIcon(pixmap);
-    gotoChitwan->setIcon(ButtonIcon);
-    //gotoChitwan->setToolButtonStyle( Qt::ToolButtonTextUnderIcon );
-    gotoChitwan->setStyleSheet(" border: none; background-color:green;");
-    gotoChitwan->setCursor(Qt::PointingHandCursor);
-    gotoChitwan->setToolTip("Chitwan National Park");
+    gotoChitwan = getButton(QIcon (":/Images/img/np.png"),QString ("Chitwan National Park"));
     connect(gotoChitwan, SIGNAL(clicked()),this,SLOT(chitwanScreen()));
 
 
     QToolButton *gotoKathmandu = new QToolButton;
-    QPixmap pixmap1("/home/aashish/NepTrip/img/icon.png");
-    QIcon ButtonIcon1(pixmap1);
-    gotoKathmandu->setIcon(ButtonIcon1);
-    gotoKathmandu->setStyleSheet(" border: none; background-color:white;");
-    gotoKathmandu->setCursor(Qt::PointingHandCursor);
-    gotoKathmandu->setToolTip("Kathmandu Valley");
+    gotoKathmandu = getButton(QIcon (":/Images/img/icon.png"),QString ("Kathmandu Valley"));
     connect(gotoKathmandu, SIGNAL(clicked()),this,SLOT(kathmanduScreen()));
 
     QToolButton *gotoKhaptad = new QToolButton;
-    QPixmap pixmap01("/home/aashish/NepTrip/img/np.png");
-    QIcon ButtonIcon01(pixmap01);
-    gotoKhaptad->setIcon(ButtonIcon01);
-    gotoKhaptad->setStyleSheet(" border: none; background-color:green;");
-    gotoKhaptad->setCursor(Qt::PointingHandCursor);
-    gotoKhaptad->setToolTip("Khaptad National Park");
+    gotoKhaptad = getButton(QIcon (":/Images/img/np.png"),QString ("Khaptad National Park"));
     connect(gotoKhaptad, SIGNAL(clicked()),this,SLOT(khaptadScreen()));
 
     QToolButton *gotoABC = new QToolButton;
-    QPixmap pixmap2("/home/aashish/NepTrip/img/mt.png");
-    QIcon ButtonIcon2(pixmap2);
-    gotoABC->setIcon(ButtonIcon2);
-    gotoABC->setStyleSheet(" border: none; background-color:white;");
-    gotoABC->setCursor(Qt::PointingHandCursor);
-    gotoABC->setToolTip("Annapurna Base Camp");
+    gotoABC = getButton(QIcon (":/Images/img/mt.png"),QString ("Everest Base Camp"));
     connect(gotoABC, SIGNAL(clicked()),this,SLOT(ABCScreen()));
 
     QToolButton *gotoPokhara = new QToolButton;
-    QPixmap pixmap3("/home/aashish/NepTrip/img/icon.png");
-    QIcon ButtonIcon3(pixmap3);
-    gotoPokhara->setIcon(ButtonIcon3);
-    gotoPokhara->setStyleSheet(" border: none; background-color:white;");
-    gotoPokhara->setCursor(Qt::PointingHandCursor);
-    gotoPokhara->setToolTip("Pokhara");
+    gotoPokhara = getButton(QIcon (":/Images/img/icon.png"),QString ("Pokhara"));
     connect(gotoPokhara, SIGNAL(clicked()),this,SLOT(pokharaScreen()));
 
     QToolButton *gotoBhaktapur = new QToolButton;
-    QPixmap pixmap4("/home/aashish/NepTrip/img/icon.png");
-    QIcon ButtonIcon4(pixmap4);
-    gotoBhaktapur->setIcon(ButtonIcon4);
-    gotoBhaktapur->setStyleSheet(" border: none; background-color:white;");
-    gotoBhaktapur->setCursor(Qt::PointingHandCursor);
-    gotoBhaktapur->setToolTip("Bhaktapur");
+    gotoBhaktapur = getButton(QIcon (":/Images/img/icon.png"),QString ("Bhaktapur"));
     connect(gotoBhaktapur, SIGNAL(clicked()),this,SLOT(bhaktapurScreen()));
 
     QToolButton *gotoDhulikhel = new QToolButton;
-    QPixmap pixmap5("/home/aashish/NepTrip/img/icon.png");
-    QIcon ButtonIcon5(pixmap5);
-    gotoDhulikhel->setIcon(ButtonIcon5);
-    gotoDhulikhel->setStyleSheet(" border: none; background-color:white;");
-    gotoDhulikhel->setCursor(Qt::PointingHandCursor);
-    gotoDhulikhel->setToolTip("Dhulikhel");
+    gotoDhulikhel = getButton(QIcon (":/Images/img/icon.png"),QString ("Dhulikhel"));
     connect(gotoDhulikhel, SIGNAL(clicked()),this,SLOT(dhulikhelScreen()));
 
     QToolButton *gotoNagarkot = new QToolButton;
-    QPixmap pixmap6("/home/aashish/NepTrip/img/icon.png");
-    QIcon ButtonIcon6(pixmap6);
-    gotoNagarkot->setIcon(ButtonIcon6);
-    gotoNagarkot->setStyleSheet(" border: none; background-color:white;");
-    gotoNagarkot->setCursor(Qt::PointingHandCursor);
-    gotoNagarkot->setToolTip("Nagarkot");
+    gotoNagarkot = getButton(QIcon (":/Images/img/icon.png"),QString ("Nagarkot"));
     connect(gotoNagarkot, SIGNAL(clicked()),this,SLOT(nagarkotScreen()));
 
     QToolButton *gotoKakani = new QToolButton;
-    QPixmap pixmap7("/home/aashish/NepTrip/img/icon.png");
-    QIcon ButtonIcon7(pixmap7);
-    gotoKakani->setIcon(ButtonIcon7);
-    gotoKakani->setStyleSheet(" border: none; background-color:white;");
-    gotoKakani->setCursor(Qt::PointingHandCursor);
-    gotoKakani->setToolTip("Kakani");
+    gotoKakani = getButton(QIcon (":/Images/img/icon.png"),QString ("Kakani"));
     connect(gotoKakani, SIGNAL(clicked()),this,SLOT(kakaniScreen()));
 
     QToolButton *gotoEBC = new QToolButton;
-    QPixmap pixmap8("/home/aashish/NepTrip/img/mt.png");
-    QIcon ButtonIcon8(pixmap8);
-    gotoEBC->setIcon(ButtonIcon8);
-    gotoEBC->setStyleSheet(" border: none; background-color:white;");
-    gotoEBC->setCursor(Qt::PointingHandCursor);
-    gotoEBC->setToolTip("Everest Base Camp");
+    gotoEBC = getButton(QIcon (":/Images/img/mt.png"),QString ("Everest Base Camp"));
     connect(gotoEBC, SIGNAL(clicked()),this,SLOT(EBCScreen()));
 
     QToolButton *gotoSagarmatha = new QToolButton;
-    QPixmap pixmap9("/home/aashish/NepTrip/img/np.png");
-    QIcon ButtonIcon9(pixmap9);
-    gotoSagarmatha->setIcon(ButtonIcon9);
-    gotoSagarmatha->setStyleSheet(" border: none; background-color:green;");
-    gotoSagarmatha->setCursor(Qt::PointingHandCursor);
-    gotoSagarmatha->setToolTip("Sagarmatha National Park");
+    gotoSagarmatha = getButton(QIcon (":/Images/img/np.png"),QString ("Sagarmatha National Park"));
     connect(gotoSagarmatha, SIGNAL(clicked()),this,SLOT(sagarmathaScreen()));
 
     QToolButton *gotoLhotse = new QToolButton;
-    QPixmap pixmap10("/home/aashish/NepTrip/img/mt.png");
-    QIcon ButtonIcon10(pixmap10);
-    gotoLhotse->setIcon(ButtonIcon10);
-    gotoLhotse->setStyleSheet(" border: none; background-color:white;");
-    gotoLhotse->setCursor(Qt::PointingHandCursor);
-    gotoLhotse->setToolTip("Lhotse");
+    gotoLhotse = getButton(QIcon (":/Images/img/mt.png"),QString ("Lhotse"));
     connect(gotoLhotse, SIGNAL(clicked()),this,SLOT(lhotseScreen()));
 
     QToolButton *gotoHelambu = new QToolButton;
-    QPixmap pixmap11("/home/aashish/NepTrip/img/icon.png");
-    QIcon ButtonIcon11(pixmap11);
-    gotoHelambu->setIcon(ButtonIcon11);
-    gotoHelambu->setStyleSheet(" border: none; background-color:white;");
-    gotoHelambu->setCursor(Qt::PointingHandCursor);
-    gotoHelambu->setToolTip("Helambu");
+    gotoHelambu = getButton(QIcon (":/Images/img/icon.png"),QString ("Helambu"));
     connect(gotoHelambu, SIGNAL(clicked()),this,SLOT(helambuScreen()));
 
     QToolButton *gotoLumbini = new QToolButton;
-    QPixmap pixmap12("/home/aashish/NepTrip/img/icon.png");
-    QIcon ButtonIcon12(pixmap12);
-    gotoLumbini->setIcon(ButtonIcon12);
-    gotoLumbini->setStyleSheet(" border: none; background-color:white;");
-    gotoLumbini->setCursor(Qt::PointingHandCursor);
-    gotoLumbini->setToolTip("Lumbini");
+    gotoLumbini = getButton(QIcon (":/Images/img/icon.png"),QString ("Lumbini"));
     connect(gotoLumbini, SIGNAL(clicked()),this,SLOT(lumbiniScreen()));
 
     QToolButton *gotoGorkha = new QToolButton;
-    QPixmap pixmap13("/home/aashish/NepTrip/img/icon.png");
-    QIcon ButtonIcon13(pixmap13);
-    gotoGorkha->setIcon(ButtonIcon13);
-    gotoGorkha->setStyleSheet(" border: none; background-color:white;");
-    gotoGorkha->setCursor(Qt::PointingHandCursor);
-    gotoGorkha->setToolTip("Gorkha");
+    gotoGorkha = getButton(QIcon (":/Images/img/icon.png"),QString ("Gorkha"));
     connect(gotoGorkha, SIGNAL(clicked()),this,SLOT(gorkhaScreen()));
 
     QToolButton *gotoBandipur = new QToolButton;
-    QPixmap pixmap14("/home/aashish/NepTrip/img/icon.png");
-    QIcon ButtonIcon14(pixmap14);
-    gotoBandipur->setIcon(ButtonIcon14);
-    gotoBandipur->setStyleSheet(" border: none; background-color:white;");
-    gotoBandipur->setCursor(Qt::PointingHandCursor);
-    gotoBandipur->setToolTip("Bandipur");
+    gotoBandipur = getButton(QIcon (":/Images/img/icon.png"),QString ("Bandipur"));
     connect(gotoBandipur, SIGNAL(clicked()),this,SLOT(bandipurScreen()));
 
     QToolButton *gotoJanakpur = new QToolButton;
-    QPixmap pixmap15("/home/aashish/NepTrip/img/icon.png");
-    QIcon ButtonIcon15(pixmap15);
-    gotoJanakpur->setIcon(ButtonIcon15);
-    gotoJanakpur->setStyleSheet(" border: none; background-color:white;");
-    gotoJanakpur->setCursor(Qt::PointingHandCursor);
-    gotoJanakpur->setToolTip("Janakpur");
+    gotoJanakpur = getButton(QIcon (":/Images/img/icon.png"),QString ("Janakpur"));
     connect(gotoJanakpur, SIGNAL(clicked()),this,SLOT(janakpurScreen()));
 
     QToolButton *gotoBirgunj = new QToolButton;
-    QPixmap pixmap16("/home/aashish/NepTrip/img/icon.png");
-    QIcon ButtonIcon16(pixmap16);
-    gotoBirgunj->setIcon(ButtonIcon16);
-    gotoBirgunj->setStyleSheet(" border: none; background-color:white;");
-    gotoBirgunj->setCursor(Qt::PointingHandCursor);
-    gotoBirgunj->setToolTip("Birgunj");
+    gotoBirgunj = getButton(QIcon (":/Images/img/icon.png"),QString ("Birgunj"));
     connect(gotoBirgunj, SIGNAL(clicked()),this,SLOT(birgunjScreen()));
 
     QToolButton *gotoIllam = new QToolButton;
-    QPixmap pixmap17("/home/aashish/NepTrip/img/icon.png");
-    QIcon ButtonIcon17(pixmap17);
-    gotoIllam->setIcon(ButtonIcon17);
-    gotoIllam->setStyleSheet(" border: none; background-color:white;");
-    gotoIllam->setCursor(Qt::PointingHandCursor);
-    gotoIllam->setToolTip("Illam");
+    gotoIllam = getButton(QIcon (":/Images/img/icon.png"),QString ("Illam"));
     connect(gotoIllam, SIGNAL(clicked()),this,SLOT(illamScreen()));
 
     QToolButton *gotoManang = new QToolButton;
-    QPixmap pixmap18("/home/aashish/NepTrip/img/icon.png");
-    QIcon ButtonIcon18(pixmap18);
-    gotoManang->setIcon(ButtonIcon18);
-    gotoManang->setStyleSheet(" border: none; background-color:white;");
-    gotoManang->setCursor(Qt::PointingHandCursor);
-    gotoManang->setToolTip("Manang");
+    gotoManang = getButton(QIcon (":/Images/img/icon.png"),QString ("Manang"));
     connect(gotoManang, SIGNAL(clicked()),this,SLOT(manangScreen()));
 
     QToolButton *gotoMustang = new QToolButton;
-    QPixmap pixmap19("/home/aashish/NepTrip/img/icon.png");
-    QIcon ButtonIcon19(pixmap19);
-    gotoMustang->setIcon(ButtonIcon19);
-    gotoMustang->setStyleSheet(" border: none; background-color:white;");
-    gotoMustang->setCursor(Qt::PointingHandCursor);
-    gotoMustang->setToolTip("Mustang");
+    gotoMustang = getButton(QIcon (":/Images/img/icon.png"),QString ("Mustang"));
     connect(gotoMustang, SIGNAL(clicked()),this,SLOT(mustangScreen()));
 
     QToolButton *gotoTansen = new QToolButton;
-    QPixmap pixmap20("/home/aashish/NepTrip/img/icon.png");
-    QIcon ButtonIcon20(pixmap20);
-    gotoTansen->setIcon(ButtonIcon20);
-    gotoTansen->setStyleSheet(" border: none; background-color:white;");
-    gotoTansen->setCursor(Qt::PointingHandCursor);
-    gotoTansen->setToolTip("Tansen");
+    gotoTansen = getButton(QIcon (":/Images/img/icon.png"),QString ("Tansen"));
     connect(gotoTansen, SIGNAL(clicked()),this,SLOT(tansenScreen()));
 
     QToolButton *gotoDaman = new QToolButton;
-    QPixmap pixmap21("/home/aashish/NepTrip/img/icon.png");
-    QIcon ButtonIcon21(pixmap21);
-    gotoDaman->setIcon(ButtonIcon21);
-    gotoDaman->setStyleSheet(" border: none; background-color:white;");
-    gotoDaman->setCursor(Qt::PointingHandCursor);
-    gotoDaman->setToolTip("Daman");
+    gotoDaman = getButton(QIcon (":/Images/img/icon.png"),QString ("Daman"));
     connect(gotoDaman, SIGNAL(clicked()),this,SLOT(damanScreen()));
 
     QToolButton *gotoNamche = new QToolButton;
-    QPixmap pixmap22("/home/aashish/NepTrip/img/icon.png");
-    QIcon ButtonIcon22(pixmap22);
-    gotoNamche->setIcon(ButtonIcon22);
-    gotoNamche->setStyleSheet(" border: none; background-color:white;");
-    gotoNamche->setCursor(Qt::PointingHandCursor);
-    gotoNamche->setToolTip("Namche Bazaar");
+    gotoNamche = getButton(QIcon (":/Images/img/icon.png"),QString ("Namche"));
     connect(gotoNamche, SIGNAL(clicked()),this,SLOT(namcheScreen()));
 
     QToolButton *gotoHile = new QToolButton;
-    QPixmap pixmap23("/home/aashish/NepTrip/img/icon.png");
-    QIcon ButtonIcon23(pixmap23);
-    gotoHile->setIcon(ButtonIcon23);
-    gotoHile->setStyleSheet(" border: none; background-color:white;");
-    gotoHile->setCursor(Qt::PointingHandCursor);
-    gotoHile->setToolTip("Hile");
+    gotoHile = getButton(QIcon (":/Images/img/icon.png"),QString ("Hile"));
     connect(gotoHile, SIGNAL(clicked()),this,SLOT(hileScreen()));
 
     QToolButton *gotoShivapuri = new QToolButton;
-    QPixmap pixmap24("/home/aashish/NepTrip/img/np.png");
-    QIcon ButtonIcon24(pixmap24);
-    gotoShivapuri->setIcon(ButtonIcon24);
-    gotoShivapuri->setStyleSheet(" border: none; background-color:green;");
-    gotoShivapuri->setCursor(Qt::PointingHandCursor);
-    gotoShivapuri->setToolTip("Shivapuri National Park");
+    gotoShivapuri = getButton(QIcon (":/Images/img/np.png"),QString ("Shivapuri National Park"));
     connect(gotoShivapuri, SIGNAL(clicked()),this,SLOT(shivapuriScreen()));
 
     QToolButton *gotoGhorepani = new QToolButton;
-    QPixmap pixmap25("/home/aashish/NepTrip/img/icon.png");
-    QIcon ButtonIcon25(pixmap25);
-    gotoGhorepani->setIcon(ButtonIcon25);
-    gotoGhorepani->setStyleSheet(" border: none; background-color:white;");
-    gotoGhorepani->setCursor(Qt::PointingHandCursor);
-    gotoGhorepani->setToolTip("Ghorepani,Ghandruk");
+    gotoGhorepani = getButton(QIcon (":/Images/img/icon.png"),QString ("Ghorepani"));
     connect(gotoGhorepani, SIGNAL(clicked()),this,SLOT(ghorepaniScreen()));
 
     QToolButton *gotoLangtang = new QToolButton;
-    QPixmap pixmap26("/home/aashish/NepTrip/img/np.png");
-    QIcon ButtonIcon26(pixmap26);
-    gotoLangtang->setIcon(ButtonIcon26);
-    gotoLangtang->setStyleSheet(" border: none; background-color:green;");
-    gotoLangtang->setCursor(Qt::PointingHandCursor);
-    gotoLangtang->setToolTip("Langtang National Park");
+    gotoLangtang = getButton(QIcon (":/Images/img/np.png"),QString ("Langtang National Park"));
     connect(gotoLangtang, SIGNAL(clicked()),this,SLOT(langtangScreen()));
 
     QToolButton *gotoBesisahar = new QToolButton;
-    QPixmap pixmap27("/home/aashish/NepTrip/img/icon.png");
-    QIcon ButtonIcon27(pixmap27);
-    gotoBesisahar->setIcon(ButtonIcon27);
-    gotoBesisahar->setStyleSheet(" border: none; background-color:white;");
-    gotoBesisahar->setCursor(Qt::PointingHandCursor);
-    gotoBesisahar->setToolTip("Besisahar");
+    gotoBesisahar = getButton(QIcon (":/Images/img/icon.png"),QString ("Besisahar"));
     connect(gotoBesisahar, SIGNAL(clicked()),this,SLOT(besisaharScreen()));
 
     QToolButton *gotoJiri = new QToolButton;
-    QPixmap pixmap28("/home/aashish/NepTrip/img/icon.png");
-    QIcon ButtonIcon28(pixmap28);
-    gotoJiri->setIcon(ButtonIcon28);
-    gotoJiri->setStyleSheet(" border: none; background-color:white;");
-    gotoJiri->setCursor(Qt::PointingHandCursor);
-    gotoJiri->setToolTip("Jiri");
+    gotoJiri = getButton(QIcon (":/Images/img/icon.png"),QString ("Jiri"));
     connect(gotoJiri, SIGNAL(clicked()),this,SLOT(jiriScreen()));
 
     QToolButton *gotoChitlang = new QToolButton;
-    QPixmap pixmap29("/home/aashish/NepTrip/img/icon.png");
-    QIcon ButtonIcon29(pixmap29);
-    gotoChitlang->setIcon(ButtonIcon29);
-    gotoChitlang->setStyleSheet(" border: none; background-color:white;");
-    gotoChitlang->setCursor(Qt::PointingHandCursor);
-    gotoChitlang->setToolTip("Chitlang");
+    gotoChitlang = getButton(QIcon (":/Images/img/icon.png"),QString ("Chitlang"));
     connect(gotoChitlang, SIGNAL(clicked()),this,SLOT(chitlangScreen()));
 
-    QToolButton *gotoAnywhere = new QToolButton;
-    QPixmap pixmap30("/home/aashish/NepTrip/img/icon.png");
-    QIcon ButtonIcon30(pixmap30);
-    gotoAnywhere->setIcon(ButtonIcon30);
-    gotoAnywhere->setStyleSheet(" border: none; background-color:white;");
-    gotoAnywhere->setCursor(Qt::PointingHandCursor);
-    gotoAnywhere->setToolTip("Chitlang");
-    connect(gotoAnywhere, SIGNAL(clicked()),this,SLOT(chitlangScreen()));
+    QToolButton *gotoBack = new QToolButton;
+    gotoBack = getButton(QIcon (":/Images/img/icon.png"),QString ("Back"));
+    connect(gotoBack, SIGNAL(clicked()),this,SLOT(mapScreen()));
+
 
 
     layout->addWidget(gotoChitwan, 700, 800);
-
     layout->addWidget(gotoShivapuri, 900, 900 );
-
     layout->addWidget(gotoKhaptad, 800, 500);
     layout->addWidget(gotoLangtang, 1625, 2100);
-
     layout->addWidget(gotoPokhara, 1600, 1625);
     layout->addWidget(gotoBhaktapur, 1650, 2100);
-
     layout->addWidget(gotoKathmandu, 1650, 2150);
-
     layout->addWidget(gotoDhulikhel, 1650, 2050);
     layout->addWidget(gotoChitlang, 1750, 2050);
     layout->addWidget(gotoDaman, 1700, 2050);
-
     layout->addWidget(gotoNagarkot, 700, 700);
     layout->addWidget(gotoKakani, 800, 800);
-
     layout->addWidget(gotoEBC, 1640, 2420);
     layout->addWidget(gotoSagarmatha, 1600, 2420);
     layout->addWidget(gotoLhotse, 1670, 2480);
-        //layout->addWidget(gotoNamche,1800,2500);
-
+    layout->addWidget(gotoNamche,1800,2500);
     layout->addWidget(gotoHelambu, 1600, 2100);
     layout->addWidget(gotoLumbini, 1700, 1300);
     layout->addWidget(gotoGorkha, 1500, 1800);
     layout->addWidget(gotoBandipur, 1650, 1750);
     layout->addWidget(gotoJanakpur, 2400, 2198);
     layout->addWidget(gotoBirgunj, 2400, 2100);
-
     layout->addWidget(gotoManang, 1425, 1700);
     layout->addWidget(gotoABC, 1425, 1675);
     layout->addWidget(gotoMustang, 1400, 1625);
-
     layout->addWidget(gotoTansen, 1650, 1550);
-
     layout->addWidget(gotoGhorepani, 1600, 1600);
-
     layout->addWidget(gotoJiri, 1670, 2198);
     layout->addWidget(gotoBesisahar, 1625, 1650);
-
     layout->addWidget(gotoHile, 2000, 2450);
-
     layout->addWidget(gotoIllam, 2100, 2500);
-    layout->addWidget(gotoAnywhere, 3100, 3100);
+    layout->addWidget(gotoBack, 3100, 3100);
 
     window->setLayout(layout);
     setWindowTitle("NepTrip");
 }
+
 
 void MainWindow::chitwanScreen(){
     QWidget *window = new QWidget();
@@ -444,51 +293,15 @@ void MainWindow::chitwanScreen(){
     setCentralWidget(window);
 
     QGridLayout *layout = new QGridLayout();
-    m_pTableWidget = new QTableWidget;
 
-    layout->addWidget(m_pTableWidget,1,1,1,1);
-
-    QPixmap bkgnd("/home/aashish/NepTrip/img/chitwan.jpg");
-
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
+    QLabel *chitwan = new QLabel();
+    chitwan=getCityImg(QPixmap(":/Images/img/chitwan.jpg"));
 
     window->setLayout(layout);
-    setWindowTitle("Chitwan");
-    m_pTableWidget->setRowCount(7);
-    m_pTableWidget->setColumnCount(1);
-    m_pTableWidget->setColumnWidth(2,400);
-    m_TableHeader<<"Details";
-    QStringList verticalHeader;
-    verticalHeader<<"District"<<"Climate"<<"Tourism Places"<<"Temperature"<<"Yearly Tourists"<<"Average Expenditure"<<"Working Agencies";
-    m_pTableWidget->setHorizontalHeaderLabels(m_TableHeader);
-    m_pTableWidget->setVerticalHeaderLabels(verticalHeader);
-    m_pTableWidget->verticalHeader()->setVisible(true);
-    m_pTableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    m_pTableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);
-    m_pTableWidget->setSelectionMode(QAbstractItemView::SingleSelection);
-    m_pTableWidget->setShowGrid(true);
-    m_pTableWidget->setFixedHeight(255);
-    m_pTableWidget->setStyleSheet("QTableView {selection-background-color: red;}");
-    m_pTableWidget->setGeometry(QApplication::desktop()->screenGeometry());
-
-    QFile file("/home/aashish/NepTrip/chitwan.txt");
-      if (file.open(QIODevice::ReadOnly | QIODevice::Text))
-      {
-           QTextStream status(&file);
-           QString line;
-           int i= 0;
-           do{
-               line = status.readLine();
-               m_pTableWidget->setItem(0, i,new QTableWidgetItem(line));
-               i++;
-           }while (!line.isNull());
-           file.close();
-      }
-
+    layout->addWidget(chitwan);
+    setWindowTitle("Chitwan National Park");
 }
+
 
 void MainWindow::kathmanduScreen(){
     QWidget *window = new QWidget();
@@ -499,33 +312,20 @@ void MainWindow::kathmanduScreen(){
     setCentralWidget(window);
 
     QLabel *kathmandu = new QLabel();
-    QPixmap ktmmap("/home/aashish/NepTrip/img/kathmandu.jpg");
-    kathmandu->setPixmap(ktmmap);
-    kathmandu->setMask(ktmmap.mask());
-    kathmandu->setAlignment(Qt::AlignCenter);
+    kathmandu=getCityImg(QPixmap(":/Images/img/kathmandu.jpg"));
 
-    QTextBrowser* displayIntro = new QTextBrowser();
-    QFile file("/home/aashish/NepTrip/files/ktm.txt");
-         if (file.open(QIODevice::ReadOnly | QIODevice::Text))
-            {
-             QTextStream status(&file);
-             displayIntro->setText(file.readAll());
-            }
+    QTextBrowser *displayIntro = new QTextBrowser();
+    displayIntro=getfile(QString(":/Files/files/ktm.txt"),QString("Intro"));
+
+    QTextBrowser* displayHotel= new QTextBrowser();
+    displayHotel=getfile(QString(":/Files/files/ktmhotel.txt"),QString("Hotel"));
 
     QTextBrowser* displayAgency= new QTextBrowser();
-    QFile file1("/home/aashish/NepTrip/files/ktmagency.txt");
-        if (file1.open(QIODevice::ReadOnly | QIODevice::Text))
-            {
-            QTextStream status(&file1);
-            displayAgency->setText(file1.readAll());
-            }
+    displayAgency=getfile(QString(":/Files/files/ktm.txt"),QString("Agency"));
+
     QTextBrowser* displayclimate= new QTextBrowser();
-    QFile file2("/home/aashish/NepTrip/files/ktmclimate.txt");
-    if (file2.open(QIODevice::ReadOnly | QIODevice::Text));
-    {
-        QTextStream status(&file2);
-        displayclimate->setText(file2.readAll());
-    }
+    displayclimate=getfile(QString(":/Files/files/ktmclimate.txt"),QString("Extra"));
+
 
     QHBoxLayout *topLayout = new QHBoxLayout();
     topLayout->addWidget(kathmandu);
@@ -534,6 +334,7 @@ void MainWindow::kathmanduScreen(){
 
     QHBoxLayout *bottomLayout = new QHBoxLayout();
     bottomLayout->addWidget(displayclimate);
+    bottomLayout->addWidget(displayHotel);
     bottomLayout->addWidget(displayAgency);
     bottomFiller->setLayout(bottomLayout);
 
@@ -553,14 +354,11 @@ void MainWindow::khaptadScreen(){
 
     QGridLayout *layout = new QGridLayout();
 
-    QPixmap bkgnd("/home/aashish/NepTrip/img/khaptad.jpg");
-
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
+    QLabel* khaptad =new QLabel();
+    khaptad=getCityImg(QPixmap(":/Images/img/khaptad.jpg"));
 
     window->setLayout(layout);
+    layout->addWidget(khaptad);
     setWindowTitle("Khaptad National Park");
 }
 
@@ -569,16 +367,13 @@ void MainWindow::ABCScreen(){
 
     setCentralWidget(window);
 
-    QPixmap bkgnd("/home/aashish/NepTrip/img/abc.jpg");
-
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
+    QLabel* ABC =new QLabel();
+    ABC=getCityImg(QPixmap(":/Images/img/abc.jpg"));
 
     QGridLayout *layout = new QGridLayout();
 
     window->setLayout(layout);
+    layout->addWidget(ABC);
     setWindowTitle("Annapurna Base Camp");
 }
 
@@ -587,16 +382,13 @@ void MainWindow::pokharaScreen(){
 
     setCentralWidget(window);
 
-    QPixmap bkgnd("/home/aashish/NepTrip/img/pokhara.jpg");
-
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
+    QLabel* pokhara =new QLabel();
+    pokhara=getCityImg(QPixmap(":/Images/img/pokhara.jpg"));
 
     QGridLayout *layout = new QGridLayout();
 
     window->setLayout(layout);
+    layout->addWidget(pokhara);
     setWindowTitle("Pokhara");
 }
 
@@ -605,16 +397,13 @@ void MainWindow::bhaktapurScreen(){
 
     setCentralWidget(window);
 
-    QPixmap bkgnd("/home/aashish/NepTrip/img/bhaktapur.jpg");
-
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
+    QLabel* bhaktapur =new QLabel();
+    bhaktapur=getCityImg(QPixmap(":/Images/img/bhaktapur.jpg"));
 
     QGridLayout *layout = new QGridLayout();
 
     window->setLayout(layout);
+    layout->addWidget(bhaktapur);
     setWindowTitle("Bhaktapur");
 }
 
@@ -623,16 +412,13 @@ void MainWindow::dhulikhelScreen(){
 
     setCentralWidget(window);
 
-    QPixmap bkgnd("/home/aashish/NepTrip/img/dhulikhel.jpg");
-
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
+    QLabel* dhulikhel =new QLabel();
+    dhulikhel=getCityImg(QPixmap(":/Images/img/dhulikhel.jpg"));
 
     QGridLayout *layout = new QGridLayout();
 
     window->setLayout(layout);
+    layout->addWidget(dhulikhel);
     setWindowTitle("Dhulikhel");
 }
 
@@ -641,16 +427,13 @@ void MainWindow::nagarkotScreen(){
 
     setCentralWidget(window);
 
-    QPixmap bkgnd("/home/aashish/NepTrip/img/nagarkot.jpg");
-
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
+    QLabel* nagarkot =new QLabel();
+    nagarkot=getCityImg(QPixmap(":/Images/img/nagarkot.jpg"));
 
     QGridLayout *layout = new QGridLayout();
 
     window->setLayout(layout);
+    layout->addWidget(nagarkot);
     setWindowTitle("Nagarkot");
 }
 
@@ -659,16 +442,13 @@ void MainWindow::kakaniScreen(){
 
     setCentralWidget(window);
 
-    QPixmap bkgnd("/home/aashish/NepTrip/img/kakani.jpg");
-
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
+    QLabel* kakani =new QLabel();
+    kakani=getCityImg(QPixmap(":/Images/img/kakani.jpg"));
 
     QGridLayout *layout = new QGridLayout();
 
     window->setLayout(layout);
+    layout->addWidget(kakani);
     setWindowTitle("Kakani");
 }
 
@@ -677,16 +457,13 @@ void MainWindow::EBCScreen(){
 
     setCentralWidget(window);
 
-    QPixmap bkgnd("/home/aashish/NepTrip/img/ebc.jpg");
-
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
+    QLabel* EBC =new QLabel();
+    EBC=getCityImg(QPixmap(":/Images/img/ebc.jpg"));
 
     QGridLayout *layout = new QGridLayout();
 
     window->setLayout(layout);
+    layout->addWidget(EBC);
     setWindowTitle("Everest Base Camp");
 }
 
@@ -695,16 +472,13 @@ void MainWindow::sagarmathaScreen(){
 
     setCentralWidget(window);
 
-    QPixmap bkgnd("/home/aashish/NepTrip/img/sagarmatha.jpg");
-
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
+    QLabel* sagarmatha =new QLabel();
+    sagarmatha=getCityImg(QPixmap(":/Images/img/sagarmatha.jpg"));
 
     QGridLayout *layout = new QGridLayout();
 
     window->setLayout(layout);
+    layout->addWidget(sagarmatha);
     setWindowTitle("Sagarmatha National Park");
 }
 
@@ -713,16 +487,13 @@ void MainWindow::lhotseScreen(){
 
     setCentralWidget(window);
 
-    QPixmap bkgnd("/home/aashish/NepTrip/img/lhotse.jpg");
-
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
+    QLabel* lhotse =new QLabel();
+    lhotse=getCityImg(QPixmap(":/Images/img/lhotse.jpg"));
 
     QGridLayout *layout = new QGridLayout();
 
     window->setLayout(layout);
+    layout->addWidget(lhotse);
     setWindowTitle("Lhotse");
 }
 
@@ -731,16 +502,13 @@ void MainWindow::helambuScreen(){
 
     setCentralWidget(window);
 
-    QPixmap bkgnd("/home/aashish/NepTrip/img/helambu.jpg");
-
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
+    QLabel* helambu =new QLabel();
+    helambu=getCityImg(QPixmap(":/Images/img/helambu.jpg"));
 
     QGridLayout *layout = new QGridLayout();
 
     window->setLayout(layout);
+    layout->addWidget(helambu);
     setWindowTitle("Helambu");
 }
 
@@ -749,16 +517,13 @@ void MainWindow::lumbiniScreen(){
 
     setCentralWidget(window);
 
-    QPixmap bkgnd("/home/aashish/NepTrip/img/lumbini.jpg");
-
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
-
+    QLabel* lumbini =new QLabel();
+    lumbini=getCityImg(QPixmap(":/Images/img/lumbini.jpg"));
+    \
     QGridLayout *layout = new QGridLayout();
 
     window->setLayout(layout);
+    layout->addWidget(lumbini);
     setWindowTitle("Lumbini");
 }
 
@@ -767,16 +532,13 @@ void MainWindow::gorkhaScreen(){
 
     setCentralWidget(window);
 
-    QPixmap bkgnd("/home/aashish/NepTrip/img/gorkha.jpg");
-
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
+    QLabel* gorkha =new QLabel();
+    gorkha=getCityImg(QPixmap(":/Images/img/gorkha.jpg"));
 
     QGridLayout *layout = new QGridLayout();
 
     window->setLayout(layout);
+    layout->addWidget(gorkha);
     setWindowTitle("Gorkha");
 }
 
@@ -785,16 +547,13 @@ void MainWindow::bandipurScreen(){
 
     setCentralWidget(window);
 
-    QPixmap bkgnd("/home/aashish/NepTrip/img/bandipur.jpg");
-
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
+    QLabel* bandipur =new QLabel();
+    bandipur=getCityImg(QPixmap(":/Images/img/bandipur.jpg"));
 
     QGridLayout *layout = new QGridLayout();
 
     window->setLayout(layout);
+    layout->addWidget(bandipur);
     setWindowTitle("Bandipur");
 }
 
@@ -803,16 +562,13 @@ void MainWindow::janakpurScreen(){
 
     setCentralWidget(window);
 
-    QPixmap bkgnd("/home/aashish/NepTrip/img/janakpur.jpg");
-
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
+    QLabel* janakpur =new QLabel();
+    janakpur=getCityImg(QPixmap(":/Images/img/janakpur.jpg"));
 
     QGridLayout *layout = new QGridLayout();
 
     window->setLayout(layout);
+    layout->addWidget(janakpur);
     setWindowTitle("Janakpur");
 }
 
@@ -821,16 +577,13 @@ void MainWindow::birgunjScreen(){
 
     setCentralWidget(window);
 
-    QPixmap bkgnd("/home/aashish/NepTrip/img/birgunj.jpg");
-
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
+    QLabel* birgunj =new QLabel();
+    birgunj=getCityImg(QPixmap(":/Images/img/birgunj.jpg"));
 
     QGridLayout *layout = new QGridLayout();
 
     window->setLayout(layout);
+    layout->addWidget(birgunj);
     setWindowTitle("Birgunj");
 }
 
@@ -839,16 +592,13 @@ void MainWindow::illamScreen(){
 
     setCentralWidget(window);
 
-    QPixmap bkgnd("/home/aashish/NepTrip/img/illam.jpg");
-
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
+    QLabel* illam =new QLabel();
+    illam=getCityImg(QPixmap(":/Images/img/illam.jpg"));
 
     QGridLayout *layout = new QGridLayout();
 
     window->setLayout(layout);
+    layout->addWidget(illam);
     setWindowTitle("Illam");
 }
 
@@ -857,16 +607,13 @@ void MainWindow::manangScreen(){
 
     setCentralWidget(window);
 
-    QPixmap bkgnd("/home/aashish/NepTrip/img/manang.jpg");
-
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
+    QLabel* manang =new QLabel();
+    manang=getCityImg(QPixmap(":/Images/img/manang.jpg"));
 
     QGridLayout *layout = new QGridLayout();
 
     window->setLayout(layout);
+    layout->addWidget(manang);
     setWindowTitle("Manang");
 }
 
@@ -875,16 +622,13 @@ void MainWindow::mustangScreen(){
 
     setCentralWidget(window);
 
-    QPixmap bkgnd("/home/aashish/NepTrip/img/mustang.jpg");
-
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
+    QLabel* mustang =new QLabel();
+    mustang=getCityImg(QPixmap(":/Images/img/mustang.jpg"));
 
     QGridLayout *layout = new QGridLayout();
 
     window->setLayout(layout);
+    layout->addWidget(mustang);
     setWindowTitle("Mustang");
 }
 
@@ -893,16 +637,13 @@ void MainWindow::tansenScreen(){
 
     setCentralWidget(window);
 
-    QPixmap bkgnd("/home/aashish/NepTrip/img/tansen.jpg");
-
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
+    QLabel* tansen =new QLabel();
+    tansen=getCityImg(QPixmap(":/Images/img/tansen.jpg"));
 
     QGridLayout *layout = new QGridLayout();
 
     window->setLayout(layout);
+    layout->addWidget(tansen);
     setWindowTitle("Tansen");
 }
 
@@ -911,16 +652,13 @@ void MainWindow::damanScreen(){
 
     setCentralWidget(window);
 
-    QPixmap bkgnd("/home/aashish/NepTrip/img/daman.jpg");
-
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
+    QLabel* daman =new QLabel();
+    daman=getCityImg(QPixmap(":/Images/img/daman.jpg"));
 
     QGridLayout *layout = new QGridLayout();
 
     window->setLayout(layout);
+    layout->addWidget(daman);
     setWindowTitle("Daman");
 }
 
@@ -929,16 +667,13 @@ void MainWindow::namcheScreen(){
 
     setCentralWidget(window);
 
-    QPixmap bkgnd("/home/aashish/NepTrip/img/namche.jpg");
-
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
+    QLabel* namche =new QLabel();
+    namche=getCityImg(QPixmap(":/Images/img/namche.jpg"));
 
     QGridLayout *layout = new QGridLayout();
 
     window->setLayout(layout);
+    layout->addWidget(namche);
     setWindowTitle("NamcheBazaar");
 }
 
@@ -947,16 +682,13 @@ void MainWindow::hileScreen(){
 
     setCentralWidget(window);
 
-    QPixmap bkgnd("/home/aashish/NepTrip/img/hile.jpg");
-
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
+    QLabel* hile =new QLabel();
+    hile=getCityImg(QPixmap(":/Images/img/hile.jpg"));
 
     QGridLayout *layout = new QGridLayout();
 
     window->setLayout(layout);
+    layout->addWidget(hile);
     setWindowTitle("Hile");
 }
 
@@ -965,16 +697,13 @@ void MainWindow::shivapuriScreen(){
 
     setCentralWidget(window);
 
-    QPixmap bkgnd("/home/aashish/NepTrip/img/shivapuri.jpg");
-
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
+    QLabel* shivapuri =new QLabel();
+    shivapuri=getCityImg(QPixmap(":/Images/img/shivapuri.jpg"));
 
     QGridLayout *layout = new QGridLayout();
 
     window->setLayout(layout);
+    layout->addWidget(shivapuri);
     setWindowTitle("Shivapuri National Park");
 }
 
@@ -983,16 +712,13 @@ void MainWindow::ghorepaniScreen(){
 
     setCentralWidget(window);
 
-    QPixmap bkgnd("/home/aashish/NepTrip/img/ghorepani.jpg");
-
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
+    QLabel* ghorepani =new QLabel();
+    ghorepani=getCityImg(QPixmap(":/Images/img/ghorepani.jpg"));
 
     QGridLayout *layout = new QGridLayout();
 
     window->setLayout(layout);
+    layout->addWidget(ghorepani);
     setWindowTitle("Ghorepani Ghandruk");
 }
 
@@ -1001,16 +727,13 @@ void MainWindow::langtangScreen(){
 
     setCentralWidget(window);
 
-    QPixmap bkgnd("/home/aashish/NepTrip/img/langtang.jpg");
-
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
+    QLabel* langtang =new QLabel();
+    langtang=getCityImg(QPixmap(":/Images/img/langtang.jpg"));
 
     QGridLayout *layout = new QGridLayout();
 
     window->setLayout(layout);
+    layout->addWidget(langtang);
     setWindowTitle("Langtang National Park");
 }
 
@@ -1019,16 +742,13 @@ void MainWindow::besisaharScreen(){
 
     setCentralWidget(window);
 
-    QPixmap bkgnd("/home/aashish/NepTrip/img/besisahar.jpg");
-
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
+    QLabel* besisahar =new QLabel();
+    besisahar=getCityImg(QPixmap(":/Images/img/besisahar.jpg"));
 
     QGridLayout *layout = new QGridLayout();
 
     window->setLayout(layout);
+    layout->addWidget(besisahar);
     setWindowTitle("Besisahar");
 }
 
@@ -1037,16 +757,13 @@ void MainWindow::jiriScreen(){
 
     setCentralWidget(window);
 
-    QPixmap bkgnd("/home/aashish/NepTrip/img/jiri.jpg");
-
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
+    QLabel* Jiri =new QLabel();
+    Jiri=getCityImg(QPixmap(":/Images/img/jiri.jpg"));
 
     QGridLayout *layout = new QGridLayout();
 
     window->setLayout(layout);
+    layout->addWidget(Jiri);
     setWindowTitle("Jiri");
 }
 
@@ -1055,16 +772,14 @@ void MainWindow::chitlangScreen(){
 
     setCentralWidget(window);
 
-    QPixmap bkgnd("/home/aashish/NepTrip/img/chitlang.jpg");
+    QLabel* chitlang =new QLabel();
+    chitlang=getCityImg(QPixmap(":/Images/img/chitlang.jpg"));
 
-    bkgnd = bkgnd.scaled(1090,700, Qt::KeepAspectRatio);
-    QPalette palette;
-    palette.setBrush(QPalette::Background, bkgnd);
-    setPalette(palette);
 
     QGridLayout *layout = new QGridLayout();
 
     window->setLayout(layout);
+    layout->addWidget(chitlang);
     setWindowTitle("Chitlang");
 }
 

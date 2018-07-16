@@ -1,0 +1,51 @@
+<RCC>
+    <qresource prefix="/Images">
+        <file>img/tansen.jpg</file>
+        <file>img/shivapuri.jpg</file>
+        <file>img/sagarmatha.jpg</file>
+        <file>img/pokhara.jpg</file>
+        <file>img/np.png</file>
+        <file>img/namche.jpg</file>
+        <file>img/nagarkot.jpg</file>
+        <file>img/mustang.jpg</file>
+        <file>img/mt.png</file>
+        <file>img/map.jpg</file>
+        <file>img/manang.jpg</file>
+        <file>img/lumbini.jpg</file>
+        <file>img/logoNepTrip.png</file>
+        <file>img/logoNepTrip.jpg</file>
+        <file>img/lhotse.jpg</file>
+        <file>img/langtang.jpg</file>
+        <file>img/khaptad.jpg</file>
+        <file>img/kathmandu.jpg</file>
+        <file>img/kakani.jpg</file>
+        <file>img/jiri.jpg</file>
+        <file>img/janakpur.jpg</file>
+        <file>img/illam.jpg</file>
+        <file>img/icon.png</file>
+        <file>img/hile.jpg</file>
+        <file>img/helambu.jpg</file>
+        <file>img/gorkha.jpg</file>
+        <file>img/ghorepani.jpg</file>
+        <file>img/ebc.jpg</file>
+        <file>img/dhulikhel.jpg</file>
+        <file>img/daman.jpg</file>
+        <file>img/chitwan.jpg</file>
+        <file>img/chitlang.jpg</file>
+        <file>img/birgunj.jpg</file>
+        <file>img/bhaktapur.jpg</file>
+        <file>img/besisahar.jpg</file>
+        <file>img/bandipur.jpg</file>
+        <file>img/abc.jpg</file>
+        <file>Rainbow.png</file>
+        <file>Instagram.png</file>
+        <file>Harmonic.png</file>
+        <file>Dusk.png</file>
+    </qresource>
+    <qresource prefix="/Files">
+        <file>files/ktmclimate.txt</file>
+        <file>files/ktmagency.txt</file>
+        <file>files/ktm.txt</file>
+        <file>files/ktmhotel.txt</file>
+    </qresource>
+</RCC>

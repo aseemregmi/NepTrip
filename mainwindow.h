@@ -7,8 +7,9 @@
 #include <QString>
 #include <QGraphicsView>
 #include <QGraphicsScene>
-
-
+#include <QToolButton>
+#include <QTextBrowser>
+#include <QFile>
 
 class QAction;
 class QActionGroup;
@@ -63,10 +64,14 @@ private slots:
     void jiriScreen();
     void chitlangScreen();
     void about();
+    QToolButton* getButton(QIcon x,QString s);
+    QLabel* getCityImg(QPixmap x);
+    QTextBrowser* getfile(QString p,QString t);
 
 private:
     QTableWidget* m_pTableWidget;
-    QStringList m_TableHeader;
+    QStringList m_TableHeader,m_TableHeader1;
+
 
     void createActions();
     void createMenus();
