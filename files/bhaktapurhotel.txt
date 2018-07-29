@@ -1,0 +1,8 @@
+Hotels:
+
+1:Hotel View Bhaktapur
+    P:01-6619476
+
+2:Shiva Guest House
+    P:01-6610740
+   

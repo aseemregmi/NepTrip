@@ -1,0 +1,7 @@
+Hotels:
+
+1:Snow FAll Hotel
+	P:
+
+2:Dolma Lodge
+	P:

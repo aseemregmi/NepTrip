@@ -1,0 +1,6 @@
+Hotels:
+1:North Valley Home Stay
+p:014232426
+
+2:Hotel Mount Everest
+P:014344567

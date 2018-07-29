@@ -1,0 +1,8 @@
+Hotels:
+
+1:Hotel R0yal Century 
+    P:056525865
+
+2:Bharatpur Garden Resort
+    P:056527741
+    

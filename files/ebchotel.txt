@@ -1,0 +1,7 @@
+Hotels:
+
+1:Hotel Mount home
+   P:014413847
+   
+2:Hotel Sherpa Land
+    P:038540107

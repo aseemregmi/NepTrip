@@ -1,0 +1,7 @@
+Hotels:
+
+1:Hotel Silver Home
+    P:977-061-14262986
+
+2:Hotel Stay Pokhara
+   P:977-061-465146

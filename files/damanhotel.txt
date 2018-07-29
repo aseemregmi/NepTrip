@@ -1,0 +1,8 @@
+Hotel:
+
+1:Hotel Samana
+   P:057524921
+   
+2:Hotel Prakash
+    P:057525346
+    

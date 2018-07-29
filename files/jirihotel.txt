@@ -1,0 +1,7 @@
+Hotels:
+
+1:Hotel Gaurishankar View Point Inn
+    P:9846516058
+    
+2:Charikot Panaroma Resort
+    P:9851164680

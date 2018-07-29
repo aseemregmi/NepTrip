@@ -1,0 +1,8 @@
+Hotels:
+
+1:Hotel gorkha Heaven
+    P:9846044199
+    
+2:Royal Palm Resort
+    P:061524701
+   

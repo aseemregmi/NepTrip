@@ -1,0 +1,8 @@
+Hotels:
+
+1:Hotel Suraj
+    P:051522859
+
+2:Hotel Kailash
+    P:051526667
+   

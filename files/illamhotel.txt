@@ -1,0 +1,7 @@
+Hotels:
+
+1:Chewan Lodge
+    P:9742635747
+    
+2:Hotel Holiday Home
+    P:9852662008

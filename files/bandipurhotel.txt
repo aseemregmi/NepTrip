@@ -1,0 +1,8 @@
+Hotels:
+
+1:Gaun Ghar Hotel
+    P:01-4215431
+ 
+2:Hotel Kaji
+    P:9808555101
+   

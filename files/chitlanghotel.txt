@@ -1,0 +1,8 @@
+Hotel:
+
+1:Summer Hill House
+    P:014112017
+
+2:Hotel Happy Home
+    P:014216807
+   

@@ -1,0 +1,8 @@
+Hotels:
+
+1:Hotel gorkha Bisauni
+    P:064420107
+   
+2:River Fun Beach Resort
+    P:9801035699
+    

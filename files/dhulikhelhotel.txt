@@ -1,0 +1,8 @@
+Hotels;
+
+1:The Dwarikas Resort Dhulikhel
+     P:011490612
+   
+2:Namo Buddha Resort
+    P:016912212
+    
