@@ -7,4 +7,13 @@ Team Members : (*A team of enthusiastic programming beginners*) <br>
 **Niranjan Pant** <br>
 **Aashish Dhakal**
 
+**Screenshots of our application**
+![Home Page](https://github.com/aseemregmi/NepTrip/blob/master/homePage.jpg "Home Page")
+
+![Map Screen](https://github.com/aseemregmi/NepTrip/blob/master/mapPage.jpg "Map Screen")
+
+![About](https://github.com/aseemregmi/NepTrip/blob/master/aboutPage.jpg "About")
+
+![Details Screen](https://github.com/aseemregmi/NepTrip/blob/master/detailScreen.jpg "Details Screen")
+
 
