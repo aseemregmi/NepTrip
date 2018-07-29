@@ -1,0 +1,2 @@
+Hotels : 
+	1. Hotel Janaki

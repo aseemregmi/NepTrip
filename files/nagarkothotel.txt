@@ -1,0 +1,8 @@
+HotelsL:
+
+1:Hotel Mount Paradise.
+    P:9818681791
+    
+2:Peaceful Cottage and Cafe du Mont.
+    P:0166956
+   

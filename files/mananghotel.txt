@@ -1,0 +1,7 @@
+Hotels:
+
+1:Hotel Yeti
+	P:
+
+2:Hotel Pride and Spa
+	P:

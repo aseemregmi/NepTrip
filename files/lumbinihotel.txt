@@ -1,0 +1,7 @@
+Hotels:
+
+1:Hotel Little Buddha
+	P:
+
+2:Hotel Peace Palace Nepal
+	P:

@@ -1,0 +1,7 @@
+Hotels:
+
+1:Hotel Grand Sambala
+    P:9851187371
+    
+2:Kalo Pani Guest House
+    P:

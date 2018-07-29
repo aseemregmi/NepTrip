@@ -1,0 +1,7 @@
+Hotels:
+
+1:Hotel Yak And Yeti
+	P:014248999
+
+2:Hotel Annapurna 
+	P:014221711

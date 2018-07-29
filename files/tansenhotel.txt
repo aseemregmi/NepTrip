@@ -1,0 +1,7 @@
+Hotels:
+
+1:Horizon Home Stay
+	P:9847021089
+
+2:Hotel THe Rani Mahal 
+	P:9857021105
