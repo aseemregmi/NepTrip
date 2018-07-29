@@ -12,7 +12,8 @@ SOURCES += \
         mainwindow.cpp
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    search.h
 
 DISTFILES += \
     map.qml

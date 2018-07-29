@@ -10,6 +10,7 @@
 #include <QToolButton>
 #include <QTextBrowser>
 #include <QFile>
+#include <QListWidget>
 
 class QAction;
 class QActionGroup;
@@ -64,14 +65,54 @@ private slots:
     void jiriScreen();
     void chitlangScreen();
     void about();
+
+    void searchPlaces();
+    void enteredTriggered();
+
     QToolButton* getButton(QIcon x,QString s);
     QLabel* getCityImg(QPixmap x);
     QTextBrowser* getfile(QString p,QString t);
 
-private:
-    QTableWidget* m_pTableWidget;
-    QStringList m_TableHeader,m_TableHeader1;
+public:
+    QListWidget* getPlaces;
 
+private:
+
+    QLineEdit *searchBar;
+
+    QToolButton *gotoChitwan;
+    QToolButton *gotoKathmandu;
+    QToolButton *gotoKhaptad;
+    QToolButton *gotoABC;
+    QToolButton *gotoPokhara;
+    QToolButton *gotoBhaktapur;
+    QToolButton *gotoDhulikhel;
+    QToolButton *gotoNagarkot;
+    QToolButton *gotoKakani;
+    QToolButton *gotoEBC;
+    QToolButton *gotoSagarmatha;
+    QToolButton *gotoLhotse;
+    QToolButton *gotoHelambu;
+    QToolButton *gotoLumbini;
+    QToolButton *gotoGorkha;
+    QToolButton *gotoBandipur;
+    QToolButton *gotoJanakpur;
+    QToolButton *gotoBirgunj;
+    QToolButton *gotoIllam;
+    QToolButton *gotoManang;
+    QToolButton *gotoMustang;
+    QToolButton *gotoTansen;
+    QToolButton *gotoDaman;
+    QToolButton *gotoNamche;
+    QToolButton *gotoHile;
+    QToolButton *gotoShivapuri;
+    QToolButton *gotoGhorepani;
+    QToolButton *gotoLangtang;
+    QToolButton *gotoBesisahar;
+    QToolButton *gotoJiri;
+    QToolButton *gotoChitlang;
+    QToolButton *gotoBack;
+    QLabel *searchLabel;
 
     void createActions();
     void createMenus();
@@ -79,13 +120,15 @@ private:
 
     QMenu *fileMenu;
     QMenu *helpMenu;
-    QMenu *back;
+    QMenu *options;
     QAction *exitAct;
     QAction *aboutAct;
     QAction *mapScreenAct;
+    QAction *homeScreenAct;
     QImage *sourceImage;
     QGraphicsView *imageView;
     QGraphicsScene *imageScene;
+    QLabel *icons[64][36];
 };
 
 #endif
